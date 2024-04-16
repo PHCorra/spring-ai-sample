@@ -1,30 +1,27 @@
 package corra.com.springaisample.controllers;
 
-import org.springframework.ai.azure.openai.AzureOpenAiChatClient;
-import org.springframework.ai.mistralai.MistralAiChatClient;
-import org.springframework.ai.openai.OpenAiChatClient;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import corra.com.springaisample.services.PersonalAssistantService;
-import reactor.core.publisher.Flux;
 
 @RestController
 @RequestMapping("/assistant")
 public class PersonalAssistantController {
 
-    private final PersonalAssistantService personalAssistantService;
+    @Autowired
+    private PersonalAssistantService personalAssistantService;
 
-    public PersonalAssistantController(PersonalAssistantService personalAssistantService) {
-        this.personalAssistantService = personalAssistantService;
-    }
-    
-
-    @GetMapping("/stream")
-    public Flux<String> personalAssistantChat(@RequestParam(value = "message",
-        defaultValue = "teste") String message)  {
-            return personalAssistantService.sendAzureMessage(message);
+    @PostMapping()
+    public ResponseEntity<String> personalAssistantChat(
+            @RequestBody String message) {
+        System.out.println(message);
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(personalAssistantService.sendMistralAiMessage(message));
     }
 }

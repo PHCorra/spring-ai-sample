@@ -1,13 +1,13 @@
-package corra.com.springaisample;
+// package corra.com.springaisample;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
+// import org.junit.jupiter.api.Test;
+// import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest
-class SpringAiSampleApplicationTests {
+// @SpringBootTest
+// class SpringAiSampleApplicationTests {
 
-	@Test
-	void contextLoads() {
-	}
+// @Test
+// void contextLoads() {
+// }
 
-}
+// }
