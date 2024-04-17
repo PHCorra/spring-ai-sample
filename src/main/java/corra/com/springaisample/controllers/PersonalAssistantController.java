@@ -2,6 +2,8 @@ package corra.com.springaisample.controllers;
 
 import org.springframework.ai.chat.ChatResponse;
 import org.springframework.ai.chat.Generation;
+import org.springframework.ai.chat.messages.AssistantMessage;
+import org.springframework.ai.embedding.EmbeddingResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +24,14 @@ public class PersonalAssistantController {
     @PostMapping()
     public ResponseEntity<String> personalAssistantChat(
             @RequestBody String message) {
-        System.out.println(message);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(personalAssistantService.sendMistralAiMessage(message));
+    }
+
+    @PostMapping("/embedding")
+    public ResponseEntity<EmbeddingResponse> personalEmbeddedAssistantChat(
+            @RequestBody String message) {
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(personalAssistantService.sendEmbeddedMistralAiMessage(message));
     }
 }
